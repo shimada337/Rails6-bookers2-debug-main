@@ -3,7 +3,7 @@
     <tr>
       <th>image</th>
       <th>name</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
   <tbody>
@@ -13,11 +13,15 @@
         <td><%= user.name %></td>
         <td>フォロー数：<%= user.followings.count %></td>
         <td>フォロワー数：<%= user.followers.count %></td>
-        <td><% if current_user.following?(user) %>
-            <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete %>
-          <% else %>
-            <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
-          <% end %></td>
+        <% unless controller.controller_name == 'relationships' && controller.action_name == 'followers' %>
+        <% unless controller.controller_name == 'relationships' && controller.action_name == 'followings' %>
+          <td><% if current_user.following?(user) %>
+              <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete %>
+            <% else %>
+              <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
+            <% end %></td>
+        <% end %>
+        <% end %>
         <td><%= link_to 'Show', user_path(user.id), class: "user_#{user.id}" %></td>
       </tr>
     <% end %>
