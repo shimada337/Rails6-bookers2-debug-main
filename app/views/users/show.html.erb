@@ -8,6 +8,9 @@
       <% else %>
         <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
       <% end %>
+      <% if current_user.id != @user.id %>
+        <%= link_to "chatを始める" %>
+      <% end %>
       <h2 class="mt-3">New book</h2>
       <%= render 'books/form', book: @book %>
     </div>
