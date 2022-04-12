@@ -32,9 +32,14 @@
         </thead>
         <tbody>
           <tr>
-            <td>a</td>
-            <td>b</td>
-            <td>c</td>
+            <td><%= @tody_book.count %></td>
+            <td><%= @yesterday_book.count %></td>
+            <% if @yesterday_book.count == 0 %>
+              <td>前日の投稿はありません</td>
+            <% else %>
+              <td><% @the_day_before = @today_book.count / @yesterday_book.count.to_f %>
+              <%= (@the_day_before * 100).round %></td>
+            <% end %>
           </tr>
         </tbody>
       </table>
