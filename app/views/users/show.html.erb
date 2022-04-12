@@ -53,9 +53,14 @@
         </thead>
         <tbody>
           <tr>
-            <td>a</td>
-            <td>b</td>
-            <th>c</th>
+            <td><%= @this_week_book.count %></td>
+            <td><%= @last_week_book.count %></td>
+            <% if @last_week_book.count == 0 %>
+              <th>前週の投稿はありません</th>
+            <% else %>
+              <th><% @the_week_before = @this_week_book.count / @last_week_book.count.to_f %>
+              <%= (@the_week_before * 100).round %></th>
+            <% end %>
           </tr>
         </tbody>
       </table>
