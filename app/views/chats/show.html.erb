@@ -2,37 +2,18 @@
   <div class="row">
     <div class="col-xs-6">
       <h2><%= @user.name %>さんとのチャット</h2>
-      <table class="message table">
-        <thead>
-          <tr>
-            <th style="text-align: left; font-size: 30px;"><%= current_user.name %></th>
-            <th style="text-align: right: font-size: 20px;"><%= @user.name %></th>
-          </tr>
-        </thead>
-        <% @chats.each do |chat| %>
-          <% if chat.user_id == current_user.id %>
-            <tbody>
-              <tr>
-                <th>
-                  <p style="text-align: left:"><%= chat.message %></p>
-                </th>
-                <th></th>
-              </tr>
-          <% else %>
-            <tr>
-              <th></th>
-              <th>
-                <p style="text-align: right;"><%= chat.message %></p>
-              </th>
-            </tr>
-            </tbody>
+        <div class="message">
+          <% @chats.each do |chat| %>
+            <% if chat.user_id == current_user.id %>
+            　　<p style="text-align: left:"><%= chat.message %></p>
+            <% else %>
+              <p style="text-align: right;"><%= chat.message %></paa>
+            <% end %>
           <% end %>
-        <% end %>
-      </table>
+        </div>
       <%= form_with model: @chat, local: false do |f| %>
         <%= f.text_field :message %>
         <%= f.hidden_field :room_id %>
-        <%= f.submit '送信' %>
       <% end %>
     </div>
   </div>
